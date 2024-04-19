@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --color-overlay: 33 33 33;
+    }
+}
+
+@layer utilities {
+    .content {
+        @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+}
