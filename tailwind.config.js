@@ -26,6 +26,7 @@ export default {
                     '950': '#042d4d',
                 },
                 overlay: 'rgb(var(--color-overlay) / <alpha-value>)',
+                background: 'rgb(var(--color-background) / <alpha-value>)',
             },
             fontFamily: {
                 sans: ['Satoshi', ...defaultTheme.fontFamily.serif],

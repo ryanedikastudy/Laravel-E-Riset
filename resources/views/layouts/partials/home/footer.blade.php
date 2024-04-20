@@ -1,5 +1,5 @@
 <footer id="footer" class="py-20 bg-primary-500">
-    <div class="grid items-start gap-6 content md:grid-cols-2 xl:grid-cols-4">
+    <div class="grid items-start gap-10 compact md:grid-cols-2 xl:grid-cols-4">
         <img src="{{ asset('logo.png') }}" alt="Logo" class="w-auto h-10">
 
         <div class="flex flex-col space-y-4 text-white">
@@ -14,7 +14,7 @@
 
                 <div class="text-start">
                     <h6 class="font-semibold">{{ __('Telepon') }}</h6>
-                    <p class="text-sm">085765456578</p>
+                    <a href="tel:085765456578" class="text-sm">085765456578</a>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
 
                 <div class="text-start">
                     <h6 class="font-semibold">{{ __('Email') }}</h6>
-                    <p class="text-sm">balitbang@sumbarprov.go.id</p>
+                    <a href="mailto:balitbang@sumbarprov.go.id" class="text-sm">balitbang@sumbarprov.go.id</a>
                 </div>
             </div>
 
@@ -125,11 +125,10 @@
 </footer>
 
 <section id="copyright" class="py-6 bg-primary-900">
-    <div class="content">
+    <div class="compact">
         <p class="text-white">
             &copy; {{ date('Y') }}
-            {{ __('Dinas Komunikasi dan Informatika Provinsi Sumatera Barat | By Tim E-Government
-                                                                                                                                                                                                                                                                                                                                                                                                                                                Sumbar') }}
+            {{ __('Dinas Komunikasi dan Informatika Provinsi Sumatera Barat | By Tim E-Government Sumbar') }}
         </p>
     </div>
 </section>

@@ -12,8 +12,7 @@ return [
     |
     */
 
-    'failed'   => 'Akun anda tidak ditemukan dalam sistem.',
+    'failed' => 'Email atau password salah, silahkan coba lagi.',
     'password' => 'Kata sandi yang anda masukkan salah.',
     'throttle' => 'Terlalu banyak usaha masuk. Silahkan coba lagi dalam :seconds detik.',
-
 ];

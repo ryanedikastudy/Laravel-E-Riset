@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Researcher;
 
-use App\Models\ResearchField;
-use App\Http\Requests\StoreResearchFieldRequest;
-use App\Http\Requests\UpdateResearchFieldRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Patent;
+use Illuminate\Http\Request;
 
-class ResearchFieldController extends Controller
+class PatentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class ResearchFieldController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreResearchFieldRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class ResearchFieldController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ResearchField $researchField)
+    public function show(Patent $patent)
     {
         //
     }
@@ -43,7 +43,7 @@ class ResearchFieldController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ResearchField $researchField)
+    public function edit(Patent $patent)
     {
         //
     }
@@ -51,7 +51,7 @@ class ResearchFieldController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateResearchFieldRequest $request, ResearchField $researchField)
+    public function update(Request $request, Patent $patent)
     {
         //
     }
@@ -59,7 +59,7 @@ class ResearchFieldController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ResearchField $researchField)
+    public function destroy(Patent $patent)
     {
         //
     }

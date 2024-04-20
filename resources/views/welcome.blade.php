@@ -1,9 +1,9 @@
 <x-home-layout>
-    <section id="hero" class="relative py-32">
+    <section id="hero" class="relative py-24">
         <img src="{{ asset('hero.png') }}" alt="Hero Image" class="absolute inset-0 object-cover w-full h-full">
         <div id="overlay" class="absolute inset-0 bg-overlay/60"></div>
 
-        <div class="relative z-10 flex flex-col justify-center  aspect-[5/2] content">
+        <div class="relative z-10 flex flex-col justify-center  aspect-[5/2] compact">
             <h1 class="mb-4 text-5xl font-bold text-white sm:text-6xl lg:text-7xl">
                 {{ __('Temukan dan Upload Riset Penelitian') }}
             </h1>
@@ -21,11 +21,14 @@
         </div>
     </section>
 
-    <section id="photo" class="relative py-32 border-b border-gray-200">
+    <section id="photo" class="relative py-24 border-b border-gray-200">
         <img src="{{ asset('ornament.png') }}" alt="Ornament Image" class="absolute inset-0 object-center m-auto">
 
-        <div class="content">
-            <h2 class="text-4xl font-semibold text-center mb-14">{{ __('Gubernur dan Wakil Gubernur') }}</h2>
+        <div class="compact">
+            <h2 class="mb-2 text-4xl font-semibold text-center">{{ __('Gubernur dan Wakil Gubernur') }}</h2>
+            <p class="text-center text-gray-600 mb-14">
+                {{ __('Lorem ipsum dolor sit amet consectetur adipisicing elit. In iure repellendus, illum aliquid ab amet cupiditate nisi odit molestias! Corrupti!') }}
+            </p>
 
             <div class="flex items-center justify-center h-full space-x-6">
                 <div class="w-[200px] aspect-[3/4] relative">
@@ -52,38 +55,49 @@
         </div>
     </section>
 
-    <section id="riset" class="py-32 border-b border-gray-200">
-        <h2 class="text-4xl font-semibold text-center mb-14">{{ __('Riset Populer') }}</h2>
+    <section id="populer" class="py-24 border-b border-gray-200">
+        <h2 class="mb-2 text-4xl font-semibold text-center">{{ __('Riset Populer') }}</h2>
+        <p class="text-center text-gray-600 mb-14">
+            {{ __('Lorem ipsum dolor sit amet consectetur adipisicing elit. In iure repellendus, illum aliquid ab amet cupiditate nisi odit molestias! Corrupti!') }}
+        </p>
 
-        <div class="grid grid-cols-1 gap-6 content md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8">
-            @foreach ($researches as $research)
-                <div class="overflow-hidden border border-gray-200 rounded-lg bg-gradient-to-b from-white to-gray-100">
-                    <div class="w-full h-2 bg-primary-500"></div>
-                    <div class="p-6">
-                        <span class="text-sm font-medium text-gray-400">{{ __('Berita riset') }}</span>
-                        <h3 class="font-medium text-primary-500">{{ $research['description'] }}</h3>
-                        <p class="mt-4 text-sm">{{ $research['author'] }}</p>
-                        <p class="mt-4 text-sm text-gray-500">
-                            {{ __('Dipublikasi pada', [
-                                'date' => \Carbon\Carbon::parse($research['published_at'])->format('Y'),
-                            ]) }}
-                        </p>
+        <div class="compact">
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8">
+                @foreach ($researches as $research)
+                    <div
+                        class="overflow-hidden border border-gray-200 rounded-lg bg-gradient-to-b from-white to-gray-100">
+                        <div class="w-full h-2 bg-primary-500"></div>
+                        <div class="p-6">
+                            <span class="text-sm font-medium text-gray-400">{{ __('Berita riset') }}</span>
+                            <h3 class="font-medium text-primary-500">{{ $research['description'] }}</h3>
+                            <p class="mt-4 text-sm">{{ $research['author'] }}</p>
+                            <p class="mt-4 text-sm text-gray-500">
+                                {{ __('Dipublikasi pada', [
+                                    'date' => \Carbon\Carbon::parse($research['published_at'])->format('Y'),
+                                ]) }}
+                            </p>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </section>
 
-    <section id="riset" class="py-32 border-b border-gray-200">
-        <h2 class="text-4xl font-semibold text-center mb-14">{{ __('Daftar Riset') }}</h2>
 
-        <div class="content">
+
+    <section id="riset" class="py-24 border-b border-gray-200">
+        <h2 class="mb-2 text-4xl font-semibold text-center">{{ __('Daftar Riset') }}</h2>
+        <p class="text-center text-gray-600 mb-14">
+            {{ __('Lorem ipsum dolor sit amet consectetur adipisicing elit. In iure repellendus, illum aliquid ab amet cupiditate nisi odit molestias! Corrupti!') }}
+        </p>
+
+        <div class="compact">
             <div class="overflow-hidden bg-gray-100 border border-gray-200 rounded-lg">
                 <div class="w-full h-2 bg-primary-500"></div>
 
                 <div class="p-8">
                     <div class="flex justify-end mb-8">
-                        <x-dropdown align="right" width="48" contentClasses="py-1 bg-white">
+                        <x-dropdown align="right" width="48" compactClasses="py-1 bg-white">
                             <x-slot name="trigger">
                                 <x-button variant="outline" aria-haspopup="menu" type="button">
                                     {{ __('Urutkan Berdasarkan') }}
@@ -113,8 +127,9 @@
 
                     <div class="flex flex-col mb-8 space-y-8">
                         @foreach ($researches as $research)
-                            <div class="px-6 py-4 bg-white border border-gray-300 rounded">
-                                <h3 class="mb-2 text-xl font-medium text-primary-500">{{ $research['description'] }}
+                            <div class="px-6 py-4 bg-white border border-gray-300 rounded-lg">
+                                <h3 class="mb-2 text-lg font-medium text-primary-500">
+                                    {{ $research['description'] }}
                                 </h3>
 
                                 <p class="mb-4">
@@ -137,13 +152,11 @@
                                 </div>
 
                                 <div class="flex">
-                                    <a href="{{ route('research.show', $research['id']) }}"
-                                        class="font-medium text-primary-500 hover:text-primary-700">
+                                    <a href="#" class="font-medium text-primary-500 hover:text-primary-700">
                                         {{ __('Lihat Abstrak') }}
                                     </a>
 
-                                    <a href="{{ route('research.edit', $research['id']) }}"
-                                        class="ml-4 font-medium text-primary-500 hover:text-primary-700">
+                                    <a href="#" class="ml-4 font-medium text-primary-500 hover:text-primary-700">
                                         {{ __('Lihat Selengkapnya') }}
                                     </a>
                                 </div>
@@ -151,7 +164,7 @@
                         @endforeach
                     </div>
 
-                    <a href="{{ route('research.index') }}" class="flex justify-center">
+                    <a href="#" class="flex justify-center">
                         <x-button variant="primary">
                             {{ __('Lihat Selengkapnya') }}
                         </x-button>
@@ -162,9 +175,12 @@
     </section>
 
     <section class="py-20 bg-primary-500">
-        <h2 class="text-4xl font-semibold text-center text-white mb-14">{{ __('Daftar Peneliti') }}</h2>
+        <h2 class="mb-2 text-4xl font-semibold text-center text-white">{{ __('Daftar Peneliti') }}</h2>
+        <p class="text-center text-white mb-14">
+            {{ __('Lorem ipsum dolor sit amet consectetur adipisicing elit. In iure repellendus, illum aliquid ab amet cupiditate nisi odit molestias! Corrupti!') }}
+        </p>
 
-        <div class="content">
+        <div class="compact">
             <div class="grid grid-cols-1 gap-6 mb-14 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8">
                 @foreach ($researchers as $researcher)
                     <div class="p-6 bg-white border border-gray-300 rounded-lg">
@@ -177,7 +193,7 @@
                             <p class="text-sm">{{ __('Bidang') }} {{ $researcher['field'] }}</p>
                         </div>
                         <div class="flex justify-center">
-                            <a href="{{ route('researcher.show', $researcher['id']) }}">
+                            <a href="#">
                                 <x-button variant="primary">
                                     {{ __('Lihat Detail') }}
                                 </x-button>
@@ -187,7 +203,7 @@
                 @endforeach
             </div>
 
-            <a href="{{ route('researcher.index') }}" class="flex justify-center">
+            <a href="#" class="flex justify-center">
                 <x-button variant="outline" class="text-white border-white">
                     {{ __('Lihat Selengkapnya') }}
                 </x-button>
@@ -195,10 +211,13 @@
         </div>
     </section>
 
-    <section class="py-20">
-        <h2 class="text-4xl font-semibold text-center mb-14">{{ __('Daftar Pengunjung') }}</h2>
+    <section id="visitor" class="py-24 border-b border-gray-200">
+        <h2 class="mb-2 text-4xl font-semibold text-center">{{ __('Daftar Pengunjung') }}</h2>
+        <p class="text-center text-gray-600 mb-14">
+            {{ __('Lorem ipsum dolor sit amet consectetur adipisicing elit. In iure repellendus, illum aliquid ab amet cupiditate nisi odit molestias! Corrupti!') }}
+        </p>
 
-        <div class="content">
+        <div class="compact">
             <div class="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8">
                 @php
                     $counters = [
@@ -218,4 +237,5 @@
             </div>
         </div>
     </section>
+
 </x-home-layout>

@@ -12,6 +12,5 @@ class ResearchSeeder extends Seeder
      */
     public function run(): void
     {
-        //
     }
 }

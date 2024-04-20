@@ -2,16 +2,17 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Researcher;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreResearcherRequest extends FormRequest
+class UpdateResearchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,6 @@ class StoreResearcherRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

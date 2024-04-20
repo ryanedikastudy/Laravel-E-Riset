@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('research_fields', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug');
             $table->text('description');
             $table->timestamps();
         });

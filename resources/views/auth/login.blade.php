@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-session-message class="mb-4" :status="session('status')" />
 
     <div class="mb-8 text-center">
         <h1 class="text-2xl font-bold text-primary-500">{{ __('Masuk') }}</h1>
@@ -23,7 +23,7 @@
 
         <!-- Password -->
         <div class="mb-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('Kata Sandi')" />
             <x-password-input id="password" class="block w-full mt-1" type="password" name="password" required
                 autocomplete="current-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -34,12 +34,12 @@
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox"
                     class="border-gray-300 rounded shadow-sm text-primary-600 focus:ring-primary-500" name="remember">
-                <span class="text-sm text-gray-600 ms-2">{{ __('Remember me') }}</span>
+                <span class="text-sm text-gray-600 ms-2">{{ __('Ingat Saya') }}</span>
             </label>
 
             @if (Route::has('password.request'))
                 <a href="{{ route('password.request') }}" class="text-sm text-gray-600">
-                    {{ __('Forgot your password?') }}
+                    {{ __('Lupa kata sandi?') }}
                 </a>
             @endif
         </div>
@@ -51,6 +51,6 @@
 
     <span class="block text-sm text-center text-primary-500">
         {{ __('Belum punya akun?') }}
-        <a href="{{ route('register') }}">{{ __('Register') }}</a>
+        <a href="{{ route('register') }}">{{ __('Daftar') }}</a>
     </span>
 </x-guest-layout>

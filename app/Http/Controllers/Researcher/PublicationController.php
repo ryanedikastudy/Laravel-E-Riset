@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Researcher;
 
-use App\Models\ResearchType;
-use App\Http\Requests\StoreResearchTypeRequest;
-use App\Http\Requests\UpdateResearchTypeRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Publication;
+use Illuminate\Http\Request;
 
-class ResearchTypeController extends Controller
+class PublicationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class ResearchTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreResearchTypeRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class ResearchTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ResearchType $researchType)
+    public function show(Publication $publication)
     {
         //
     }
@@ -43,7 +43,7 @@ class ResearchTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ResearchType $researchType)
+    public function edit(Publication $publication)
     {
         //
     }
@@ -51,7 +51,7 @@ class ResearchTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateResearchTypeRequest $request, ResearchType $researchType)
+    public function update(Request $request, Publication $publication)
     {
         //
     }
@@ -59,7 +59,7 @@ class ResearchTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ResearchType $researchType)
+    public function destroy(Publication $publication)
     {
         //
     }

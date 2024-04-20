@@ -17,7 +17,7 @@ class ResearcherFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'identifier' => fake()->nik()
         ];
     }
 }

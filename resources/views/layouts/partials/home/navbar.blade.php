@@ -1,13 +1,14 @@
-<nav class="py-6 bg-white">
-    <div class="flex items-center justify-between w-full px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+<nav class="py-6 bg-white border-b border-gray-200">
+    <div class="flex items-center justify-between compact">
         <a href="{{ route('welcome') }}">
-            <img src="{{ asset('logo.png') }}" alt="Laravel Logo" class="w-auto h-12"></a>
+            <img src="{{ asset('logo.png') }}" alt="Logo Aplikasi" class="w-auto h-12">
+        </a>
 
         <div class="items-center hidden space-x-6 lg:flex">
             <ul class="flex items-center space-x-4">
-                <li><a href="{{ route('welcome') }}">{{ __('Dashboard') }}</a></li>
-                <li><a href="{{ route('research.index') }}">{{ __('Riset') }}</a></li>
-                <li><a href="{{ route('researcher.index') }}">{{ __('Peneliti') }}</a></li>
+                <li><a href="{{ route('researcher.dashboard.index') }}">{{ __('Dashboard') }}</a></li>
+                <li><a href="#">{{ __('Riset') }}</a></li>
+                <li><a href="#">{{ __('Peneliti') }}</a></li>
             </ul>
 
             <div class="w-px h-6 bg-primary-500"></div>

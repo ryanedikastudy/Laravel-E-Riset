@@ -42,4 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Get the researchers that belong to the user.
+     */
+    public function researcher(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Researcher::class)->withDefault();
+    }
 }

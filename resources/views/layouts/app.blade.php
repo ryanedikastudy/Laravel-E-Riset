@@ -11,29 +11,27 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.cdnfonts.com">
     <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
+    @stack('styles')
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        @include('layouts.navigation')
+<body class="min-h-screen font-sans antialiased leading-relaxed text-gray-900 bg-background">
+    @include('layouts.partials.app.navbar')
 
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
+    <main class="flex">
+        @include('layouts.partials.app.sidebar')
 
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
-    </div>
+        <div class="flex-1 min-h-screen overflow-y-auto">
+            <div class="py-20 compact">
+                {{ $slot }}
+            </div>
+        </div>
+    </main>
+
+    @include('layouts.partials.app.footer')
+    @stack('scripts')
 </body>
 
 </html>

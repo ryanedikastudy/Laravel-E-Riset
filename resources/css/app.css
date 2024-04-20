@@ -5,11 +5,20 @@
 @layer base {
     :root {
         --color-overlay: 33 33 33;
+        --color-background: 242 244 247;
+    }
+
+    img {
+        @apply select-none;
     }
 }
 
 @layer utilities {
-    .content {
-        @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    .compact {
+        @apply w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+    }
+
+    .expanded {
+        @apply w-full px-4 sm:px-6 lg:px-8;
     }
 }

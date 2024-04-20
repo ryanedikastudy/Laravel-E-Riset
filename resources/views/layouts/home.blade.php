@@ -11,19 +11,21 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.cdnfonts.com">
     <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
+    @stack('styles')
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen font-sans antialiased text-gray-900">
-    @include('layouts.partials.navbar')
+<body class="min-h-screen font-sans antialiased leading-relaxed text-gray-900 bg-background">
+    @include('layouts.partials.home.navbar')
 
     <main>
         {{ $slot }}
     </main>
 
-    @include('layouts.partials.footer')
+    @include('layouts.partials.home.footer')
+    @stack('scripts')
 </body>
 
 </html>

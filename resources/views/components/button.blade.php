@@ -55,7 +55,7 @@
 <button
     {{ $attributes->merge([
         'type' => $type,
-        'class' => "inline-flex items-center text-sm font-medium space-x-2 {$sizeClass} {$variantClass} border rounded-md focus:outline-none transition ease-in-out duration-150",
+        'class' => "inline-flex items-center text-sm font-medium space-x-2 {$sizeClass} {$variantClass} border rounded-md focus:outline-none transition ease-in-out duration-150 whitespace-nowrap",
     ]) }}>
     {{ $slot }}
 </button>

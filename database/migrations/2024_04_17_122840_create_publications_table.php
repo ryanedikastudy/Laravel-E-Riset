@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('document');
             $table->date('published_at')->nullable();
             $table->enum('status', ['published', 'draft'])->default('draft');
+            $table->integer('views')->default(0);
             $table->timestamps();
         });
     }
