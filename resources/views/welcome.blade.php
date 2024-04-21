@@ -130,7 +130,7 @@
 
                     <div class="flex flex-col mb-8 space-y-8">
                         @foreach ($researches as $research)
-                            <a href="{{ route('researcher.research.show', $research['id']) }}"
+                            <a href="{{ route('research.show', $research->id) }}"
                                 class="flex flex-col px-6 py-4 space-y-2 bg-white border border-gray-300 rounded-lg">
                                 <h3 class="font-medium text-primary-500">
                                     {{ \Illuminate\Support\Str::headline($research->title) }}
@@ -142,7 +142,7 @@
                                 <div class="flex items-center text-sm text-gray-500">
                                     <span>
                                         {{ __('Dipublikasi pada') }}
-                                        {{ \Carbon\Carbon::parse($research->published_at)->format('Y') }}
+                                        {{ \Carbon\Carbon::parse($research->published_at)->format('d M Y') }}
                                     </span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

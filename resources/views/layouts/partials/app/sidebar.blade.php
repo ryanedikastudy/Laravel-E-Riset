@@ -1,12 +1,12 @@
-<div x-data="{ open: $persist(false).as('sidebar') }" x-bind:class="{ 'lg:w-72': open }" x-cloak
-    class="relative flex-none font-medium text-gray-500 transition duration-150 ease-in-out bg-white border-r border-gray-200 lg:w-72">
+<div x-data="{ open: $persist(false).as('sidebar') }" x-bind:class="{ 'lg:w-72': open }"
+    class="relative flex-none font-medium text-gray-500 bg-white border-r border-gray-200 lg:w-72">
 
     <div class="flex flex-col px-4 py-20 space-y-4 leading-tight">
         <div class="flex">
             <div class="p-3 rounded-md cursor-pointer hover:bg-gray-100" x-on:click="open=! open">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="w-5 h-5 transition duration-150 ease-in-out" x-bind:class="{ 'rotate-180': open }">
+                    class="w-5 h-5 transition duration-150 ease-in-out " x-bind:class="{ 'rotate-180': open }">
                     <path d="m9 18 6-6-6-6" />
                 </svg>
             </div>
@@ -22,7 +22,7 @@
                 <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
 
-            <span class="hidden" x-bind:class="{ 'lg:block': open }">
+            <span x-bind:class="{ 'hidden': !open }">
                 {{ __('Dashboard') }}
             </span>
         </a>
@@ -40,7 +40,7 @@
                 <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3" />
             </svg>
 
-            <span class="hidden" x-bind:class="{ 'lg:block': open }">
+            <span x-bind:class="{ 'hidden': !open }">
                 {{ __('Kelola Riset') }}
             </span>
         </a>
@@ -55,7 +55,7 @@
                 <path d="M9.1 11h5.7" />
             </svg>
 
-            <span class="hidden" x-bind:class="{ 'lg:block': open }">
+            <span x-bind:class="{ 'hidden': !open }">
                 {{ __('Kelola Publikasi') }}
             </span>
         </a>
@@ -71,7 +71,7 @@
                 <path d="M12 22V12" />
             </svg>
 
-            <span class="hidden" x-bind:class="{ 'lg:block': open }">
+            <span x-bind:class="{ 'hidden': !open }">
                 {{ __('Kelola Paten') }}
             </span>
         </a>

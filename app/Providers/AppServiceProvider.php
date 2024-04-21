@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Route::resourceVerbs([
+            'create' => __('buat'),
+            'store' => __('simpan'),
+            'update' => __('perbarui'),
+            'destroy' => __('menghapus'),
+            'index' => __('daftar'),
+            'show' => __('tampilkan'),
+        ]);
     }
 }

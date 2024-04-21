@@ -21,6 +21,7 @@ class ResearchFactory extends Factory
             "abstract" => fake()->paragraphs(3, true),
             "location" => fake()->city(),
             "published_at" => fake()->dateTimeBetween('-1 year', 'now'),
+            "views" => rand(0, 100),
         ];
     }
 }

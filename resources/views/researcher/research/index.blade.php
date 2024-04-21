@@ -53,7 +53,7 @@
                                 {{ \Illuminate\Support\Str::upper($research->status) }}
                             </td>
                             <td>
-                                <a href="{{ route('researcher.research.show', $research->id) }}">
+                                <a href="{{ route('research.show', $research->id) }}">
                                     <x-button variant="primary">{{ __('Lihat Detail') }}</x-button>
                                 </a>
                             </td>

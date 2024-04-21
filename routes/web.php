@@ -1,15 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
 
-use App\Http\Controllers\Researcher\DashboardController as ResearcherDashboardController;
-use App\Http\Controllers\Researcher\PatentController as ResearcherPatentController;
-use App\Http\Controllers\Researcher\ResearchController as ResearcherResearchController;
-use App\Http\Controllers\Researcher\PublicationController as ResearcherPublicationController;
-use App\Models\Research;
-use App\Models\Researcher;
-use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
+use App\http\Controllers\ResearchController as GuestResearchController;
+use App\Http\Controllers\ResearcherController as GuestResearcherController;
+
+use App\Http\Controllers\Researcher\DashboardController;
+use App\Http\Controllers\Researcher\PatentController;
+use App\Http\Controllers\Researcher\ResearchController;
+use App\Http\Controllers\Researcher\PublicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,55 +24,80 @@ use Illuminate\Http\Request;
 */
 
 
+Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
-Route::get('/', function (Request $request) {
-
-
-    $sort = $request->query('sort') || 'newest';
-
-    $researchers = Researcher::orderBy('name')->limit(4)->get();
-    $populars = Research::orderBy('views', 'desc')->limit(4)->with('researcher')->get();
-    $researches = Research::with('researcher')
-        ->orderBy($sort == 'popular' ? 'views' : 'created_at', 'desc')
-        ->limit(4)->get();
-
-    return view('welcome', compact('researches', 'populars', 'researchers'));
-})->name('welcome');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-Route::group([], function () {
-    // 
+Route::group([
+    'as' => 'research.',
+    'prefix' => __('riset'),
+], function () {
+    Route::get('/', [GuestResearchController::class, 'index'])->name('index');
+    Route::get('/{id}', [GuestResearchController::class, 'show'])->name('show');
+    Route::get(__('cari'), [GuestResearchController::class, 'search'])->name('search');
 });
 
 Route::group([
-    'middleware' => 'auth',
-    'prefix' => 'researcher',
     'as' => 'researcher.',
+    'prefix' => __('peneliti'),
 ], function () {
-    Route::get('/dashboard', [ResearcherDashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/', [GuestResearcherController::class, 'index'])->name('index');
+    Route::get('/{id}', [GuestResearcherController::class, 'show'])->name('show');
+    Route::get(__('cari'), [GuestResearcherController::class, 'search'])->name('search');
+});
 
-    Route::post('/research/search', [ResearcherResearchController::class, 'search'])->name('research.search');
-    Route::post('/research/cancel', [ResearcherResearchController::class, 'cancel'])->name('research.cancel');
-    Route::post('/research/confirm', [ResearcherResearchController::class, 'confirm'])->name('research.confirm');
+Route::group([
+    'as' => 'profile.',
+    'prefix' => __('profil'),
+    'middleware' => ['auth', 'verified'],
+], function () {
+    Route::get('/', [ProfileController::class, 'edit'])->name('edit');
+    Route::patch('/', [ProfileController::class, 'update'])->name('update');
+});
 
-    Route::post('/publication/search', [ResearcherPublicationController::class, 'search'])->name('publication.search');
-    Route::post('/publication/cancel', [ResearcherPublicationController::class, 'cancel'])->name('publication.cancel');
-    Route::post('/publication/confirm', [ResearcherPublicationController::class, 'confirm'])->name('publication.confirm');
+Route::group([
+    'as' => 'researcher.',
+    'prefix' => __('dashboard'),
+    'middleware' => ['auth', 'verified'],
+], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-    Route::post('/patent/search', [ResearcherPatentController::class, 'search'])->name('patent.search');
-    Route::post('/patent/cancel', [ResearcherPatentController::class, 'cancel'])->name('patent.cancel');
-    Route::post('/patent/confirm', [ResearcherPatentController::class, 'confirm'])->name('patent.confirm');
+    Route::group([
+        'prefix' => __('riset'),
+        'as' => 'research.',
+    ], function () {
+        Route::post(__('cari'), [ResearchController::class, 'search'])->name('search');
+        Route::post(__('batal'), [ResearchController::class, 'cancel'])->name('cancel');
+        Route::post(__('konfirmasi'), [ResearchController::class, 'confirm'])->name('confirm');
+    });
 
-    Route::resources([
-        'research' => ResearcherResearchController::class,
-        'publication' => ResearcherPublicationController::class,
-        'patent' => ResearcherPatentController::class,
-    ]);
+    Route::resource(__('riset'), ResearchController::class)
+        ->except(['show', 'edit', 'update', 'destroy'])
+        ->names('research');
+
+    Route::group([
+        'prefix' => __('publikasi'),
+        'as' => 'publication.',
+    ], function () {
+        Route::post(__('cari'), [PublicationController::class, 'search'])->name('search');
+        Route::post(__('batal'), [PublicationController::class, 'cancel'])->name('cancel');
+        Route::post(__('konfirmasi'), [PublicationController::class, 'confirm'])->name('confirm');
+    });
+
+    Route::resource(__('publikasi'), PublicationController::class)
+        ->except(['show', 'edit', 'update', 'destroy'])
+        ->names('publication');
+
+    Route::group([
+        'prefix' => __('paten'),
+        'as' => 'patent.',
+    ], function () {
+        Route::post(__('cari'), [PatentController::class, 'search'])->name('search');
+        Route::post(__('batal'), [PatentController::class, 'cancel'])->name('cancel');
+        Route::post(__('konfirmasi'), [PatentController::class, 'confirm'])->name('confirm');
+    });
+
+    Route::resource(__('paten'), PatentController::class)
+        ->except(['show', 'edit', 'update', 'destroy'])
+        ->names('patent');
 });
 
 require __DIR__ . '/auth.php';

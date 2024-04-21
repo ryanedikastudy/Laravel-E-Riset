@@ -11,6 +11,10 @@
     img {
         @apply select-none;
     }
+
+    [x-cloak] {
+        display: none !important;
+    }
 }
 
 @layer utilities {
