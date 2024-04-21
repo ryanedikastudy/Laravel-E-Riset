@@ -18,42 +18,36 @@
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
                 <path d="m9 18 6-6-6-6" />
             </svg>
-            <span class="text-primary-500">
+            <span>
                 {{ __('Konfirmasi') }}
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
                 <path d="m9 18 6-6-6-6" />
             </svg>
-            <span>
-                {{ __('Selesai') }}
+            <span class="text-primary-500">
+                {{ __('Cancel') }}
             </span>
         </div>
 
         <div class="border border-gray-200 rounded-md shadow-sm">
             <div class="px-8 py-4 border-b border-gray-200">
                 <h2 class="font-bold">
-                    {{ __('Lengkapi Data') }}
+                    {{ __('Cancel') }}
                 </h2>
             </div>
 
             <div class="p-8">
                 <p class="text-sm text-gray-500">
-                    {{ __('Risetmu sudah diupload dan dapat dikirimkan kepada tim admin untuk proses approval. Anda dapat memeriksa kembali informasi yang telah diinputkan sebelum melakukan konfirmasi. Jika sudah yakin, klik “Selesai”.') }}
+                    {{ __('Risetmu berhasil dibatalkan, untuk membuat riset baru kamu dapat melakukan proses upload kembali, periksa informasi yang diinputkan sebelum melakukan konfirmasi. Jika sudah yakin, klik ”Simpan".') }}
                 </p>
             </div>
         </div>
 
         <div class="flex items-center justify-end space-x-2">
-            <form method="post" action="{{ route('researcher.research.confirm') }}">
-                @csrf
-                <x-button variant="primary">{{ __('Simpan') }}</x-button>
-            </form>
-
-            <form method="post" action="{{ route('researcher.research.cancel') }}">
-                @csrf
-                <x-button variant="ghost">{{ __('Batal') }}</x-button>
-            </form>
+            <a href="{{ route('researcher.research.index') }}">
+                <x-button variant="primary">{{ __('Selesai') }}</x-button>
+            </a>
         </div>
     </div>
 </x-app-layout>

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('abstract');
             $table->text('location');
             $table->date('published_at')->nullable();
-            $table->enum('status', ['published', 'draft'])->default('draft');
+            $table->enum('status', ['verified', 'unverified'])->default('unverified');
             $table->integer('views')->default(0);
             $table->timestamps();
         });

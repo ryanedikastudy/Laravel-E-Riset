@@ -17,10 +17,10 @@ class ResearchFactory extends Factory
     public function definition(): array
     {
         return [
-            "title" => fake()->words(5, true),
+            "title" => fake()->words(15, true),
             "abstract" => fake()->paragraphs(3, true),
             "location" => fake()->city(),
-            "published_at" => fake()->dateTimeBetween('-1 year', '+1 year'),
+            "published_at" => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

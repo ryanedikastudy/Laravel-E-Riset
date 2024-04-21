@@ -39,7 +39,9 @@
 
             <div class="p-8">
                 <p class="text-sm text-gray-500">
-                    {{ __('Risetmu sudah diupload dan dapat dikirimkan kepada tim admin untuk proses approval. Anda dapat memeriksa kembali informasi yang telah diinputkan sebelum melakukan konfirmasi. Jika sudah yakin, klik “Selesai”.') }}
+                    Risetmu sudah diupload dan dapat dikirimkan kepada tim admin untuk proses approval. Anda dapat
+                    memeriksa kembali informasi yang telah diinputkan sebelum melakukan konfirmasi. Jika sudah yakin,
+                    klik ”Simpan".
                 </p>
             </div>
         </div>

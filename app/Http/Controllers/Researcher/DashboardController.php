@@ -15,12 +15,12 @@ class DashboardController extends Controller
     public function index(Request $request): View
     {
         $counts = [
-            'research' => $request->user()->reearcher->researches()->get()->count(),
+            'research' => $request->user()->researcher->researches()->get()->count(),
             'publication' => $request->user()->researcher->publications()->get()->count(),
             'patent' => $request->user()->researcher->patents()->get()->count(),
         ];
 
-        $researches = $request->user()->researcher->researches()->limit(3)->get();
+        $researches = $request->user()->researcher->researches()->with('researcher')->limit(3)->get();
 
         return view('researcher.dashboard.index', [
             'counts' => $counts,

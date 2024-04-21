@@ -63,18 +63,21 @@
 
         <div class="compact">
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8">
-                @foreach ($researches as $research)
+                @foreach ($populars as $research)
                     <div
                         class="overflow-hidden border border-gray-200 rounded-lg bg-gradient-to-b from-white to-gray-100">
                         <div class="w-full h-2 bg-primary-500"></div>
                         <div class="p-6">
                             <span class="text-sm font-medium text-gray-400">{{ __('Berita riset') }}</span>
-                            <h3 class="font-medium text-primary-500">{{ $research['description'] }}</h3>
-                            <p class="mt-4 text-sm">{{ $research['author'] }}</p>
-                            <p class="mt-4 text-sm text-gray-500">
-                                {{ __('Dipublikasi pada', [
-                                    'date' => \Carbon\Carbon::parse($research['published_at'])->format('Y'),
-                                ]) }}
+                            <h3 class="mb-4 font-medium text-primary-500">
+                                {{ \Illuminate\Support\Str::headline($research->title) }}
+                            </h3>
+                            <h4 class="mb-2 text-sm font-medium">
+                                {{ $research->researcher->user->name }}
+                            </h4>
+                            <p class="text-sm text-gray-500">
+                                {{ __('Dipublikasi pada') }}
+                                {{ \Carbon\Carbon::parse($research->published_at)->format('Y') }}
                             </p>
                         </div>
                     </div>
@@ -127,40 +130,32 @@
 
                     <div class="flex flex-col mb-8 space-y-8">
                         @foreach ($researches as $research)
-                            <div class="px-6 py-4 bg-white border border-gray-300 rounded-lg">
-                                <h3 class="mb-2 text-lg font-medium text-primary-500">
-                                    {{ $research['description'] }}
+                            <a href="{{ route('researcher.research.show', $research['id']) }}"
+                                class="flex flex-col px-6 py-4 space-y-2 bg-white border border-gray-300 rounded-lg">
+                                <h3 class="font-medium text-primary-500">
+                                    {{ \Illuminate\Support\Str::headline($research->title) }}
                                 </h3>
+                                <h4 class="text-sm font-medium">
+                                    {{ $research->researcher->user->name }}
+                                </h4>
 
-                                <p class="mb-4">
-                                    {{ $research['author'] }} &#x2022; {{ __('Bidang') }} {{ $research['field'] }}
-                                </p>
-
-                                <div class="mb-2 text-sm text-gray-400">
-                                    <span>{{ __('Berita riset') }}</span>
-                                    |
-                                    <span>{{ __('Dipublikasi pada', [
-                                        'date' => \Carbon\Carbon::parse($research['published_at'])->format('Y'),
-                                    ]) }}
-                                    </span>
-                                    |
+                                <div class="flex items-center text-sm text-gray-500">
                                     <span>
-                                        {{ __('Dilihat sebanyak', [
-                                            'count' => $research['viewed'],
-                                        ]) }}
+                                        {{ __('Dipublikasi pada') }}
+                                        {{ \Carbon\Carbon::parse($research->published_at)->format('Y') }}
+                                    </span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12.1" cy="12.1" r="1" />
+                                    </svg>
+                                    <span>
+                                        {{ __('Dilihat sebanyak') }}
+                                        {{ $research->views }}
+                                        {{ __('kali') }}
                                     </span>
                                 </div>
-
-                                <div class="flex">
-                                    <a href="#" class="font-medium text-primary-500 hover:text-primary-700">
-                                        {{ __('Lihat Abstrak') }}
-                                    </a>
-
-                                    <a href="#" class="ml-4 font-medium text-primary-500 hover:text-primary-700">
-                                        {{ __('Lihat Selengkapnya') }}
-                                    </a>
-                                </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
 
@@ -183,15 +178,28 @@
         <div class="compact">
             <div class="grid grid-cols-1 gap-6 mb-14 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8">
                 @foreach ($researchers as $researcher)
-                    <div class="p-6 bg-white border border-gray-300 rounded-lg">
-                        <div class="mb-4">
-                            <img src="https://via.placeholder.com/150" alt="Ornament Image"
-                                class="w-32 mx-auto rounded-full aspect-square">
+                    <div class="flex flex-col items-center p-6 bg-white border border-gray-300 rounded-lg">
+                        <div
+                            class="flex items-center justify-center w-32 h-32 mb-4 overflow-hidden bg-white border border-gray-300 rounded-full">
+                            @if ($researcher->user->photo)
+                                <img src="{{ asset($researcher->user->photo) }}" alt="Profil"
+                                    class="object-cover w-full h-full">
+                            @else
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary-500">
+                                    <circle cx="12" cy="8" r="5" />
+                                    <path d="M20 21a8 8 0 0 0-16 0" />
+                                </svg>
+                            @endif
                         </div>
+
                         <div class="mb-6 text-center">
-                            <h3 class="font-medium text-primary-500">{{ $researcher['name'] }}</h3>
-                            <p class="text-sm">{{ __('Bidang') }} {{ $researcher['field'] }}</p>
+                            <h3 class="font-medium text-primary-500">
+                                {{ \Illuminate\Support\Str::headline($researcher->user->name) }}
+                            </h3>
                         </div>
+
                         <div class="flex justify-center">
                             <a href="#">
                                 <x-button variant="primary">

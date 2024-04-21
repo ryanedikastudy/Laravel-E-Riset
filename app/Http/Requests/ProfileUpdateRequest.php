@@ -25,7 +25,25 @@ class ProfileUpdateRequest extends FormRequest
             'religion' => ['required', 'string', 'min:3', 'max:255'],
             'phone' => ['required', 'string', 'min:10', 'max:15'],
             'address' => ['required', 'string', 'min:3', 'max:255'],
-            'photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif'],
+            'photo' => ['image', 'mimes:jpeg,png,jpg,gif'],
+        ];
+    }
+
+    /**
+     * Set the attributes naming for localization.
+     */
+    public function attributes(): array
+    {
+        return [
+            'name' => __('Nama Lengkap'),
+            'identifier' => __('Nomor Induk'),
+            'dob' => __('Tanggal Lahir'),
+            'gender' => __('Jenis Kelamin'),
+            'nationality' => __('Kewarganegaraan'),
+            'religion' => __('Agama'),
+            'phone' => __('Nomor Telepon'),
+            'address' => __('Alamat'),
+            'photo' => __('Foto Profil'),
         ];
     }
 }

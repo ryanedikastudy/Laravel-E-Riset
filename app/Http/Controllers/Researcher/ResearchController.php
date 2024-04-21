@@ -21,13 +21,12 @@ class ResearchController extends Controller
     {
         $search = $request->query('search');
 
-        $researches = Research::where(
-            'researcher_id',
-            $request->user()->researcher->id,
-        )
+        $researches = $request
+            ->user()
+            ->researcher->researches()
             ->when($search, function ($query, $search) use ($request) {
-                $query->where('title', 'like', '%' . $search . '%')
-                    ->orWhere('abstract', 'like', '%' . $search . '%');
+                $query->where('research.title', 'like', '%' . $search . '%')
+                    ->orWhere('research.abstract', 'like', '%' . $search . '%');
             })
             ->with('researcher.user')
             ->paginate(5)
@@ -98,11 +97,10 @@ class ResearchController extends Controller
      */
     public function store(StoreResearchRequest $request): View
     {
-        $stored = $request->session()->put('temp-research', $request->all());
+        $request->session()->put('temp-research', $request->all());
 
         return view('researcher.research.confirm', [
             'user' => $request->user(),
-            'research' => $stored,
         ]);
     }
 

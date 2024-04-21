@@ -12,43 +12,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $user = \App\Models\User::factory()->create([
+            'name' => 'Dr. Rita Erlinda, M.Pd',
+            'email' => 'ritaerlinda@example.com',
+            'password' => bcrypt('Password11!')
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
         \App\Models\Researcher::factory()->create([
-            'user_id' => \App\Models\User::factory()->create([
-                'name' => 'John Doe',
-                'email' => 'johndoe@example.com',
-                'password' => bcrypt('Password11!')
-            ])->id,
-            'dob' => '1990-01-01',
-            'phone' => '0812345678',
-            'address' => 'Jl. Jendral Sudirman No.1',
-            'religion' => 'islam',
-            'nationality' => 'Indonesia',
-            'gender' => 'male',
+            'user_id' => $user->id,
         ]);
 
-        \App\Models\Researcher::factory(5)->create([
-            'user_id' => \App\Models\User::factory()->create(),
-            'dob' => '1990-01-01',
-            'phone' => '0812345678',
-            'address' => 'Jl. Jendral Sudirman No.1',
-            'religion' => 'islam',
-            'nationality' => 'Indonesia',
-            'gender' => 'male',
-        ]);
+        for ($i = 0; $i < 5; $i++) {
+            $user = \App\Models\User::factory()->create();
+            \App\Models\Researcher::factory()->create([
+                'user_id' => $user->id,
+            ]);
+        }
 
         \App\Models\ResearchType::factory(5)->create();
         \App\Models\ResearchField::factory(5)->create();
 
-        \App\Models\Research::factory(12)->create([
+        \App\Models\Research::factory(10)->create([
+            "researcher_id" => \App\Models\Researcher::first()->id,
             "research_type_id" => \App\Models\ResearchType::first()->id,
             "research_field_id" => \App\Models\ResearchField::first()->id,
-            "researcher_id" => \App\Models\Researcher::first()->id,
         ]);
     }
 }

@@ -39,8 +39,11 @@ class ProfileController extends Controller
             $request->user()->save();
         }
 
-        $request->user()->researcher->fill($request->except('name', 'email', 'photo'));
+        $request->user()->researcher->update($request->except('name', 'photo'));
         $request->user()->researcher->save();
+
+        $request->user()->update($request->only('name', 'photo'));
+        $request->user()->save();
 
         return Redirect::route('profile.edit')->with('success', __('Data peneliti berhasil diperbarui.'));
     }

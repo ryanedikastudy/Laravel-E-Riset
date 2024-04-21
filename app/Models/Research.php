@@ -32,7 +32,7 @@ class Research extends Model
      */
     public function researcher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Researcher::class);
+        return $this->belongsTo(Researcher::class, 'researcher_id', 'id');
     }
 
     /** 
@@ -40,7 +40,7 @@ class Research extends Model
      */
     public function field(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(ResearchField::class);
+        return $this->belongsTo(ResearchField::class, 'research_field_id');
     }
 
     /** 
@@ -48,7 +48,7 @@ class Research extends Model
      */
     public function type(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(ResearchType::class);
+        return $this->belongsTo(ResearchType::class, 'research_type_id');
     }
 
     /**

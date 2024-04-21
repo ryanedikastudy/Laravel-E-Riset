@@ -9,6 +9,7 @@ use App\Http\Controllers\Researcher\ResearchController as ResearcherResearchCont
 use App\Http\Controllers\Researcher\PublicationController as ResearcherPublicationController;
 use App\Models\Research;
 use App\Models\Researcher;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +24,18 @@ use App\Models\Researcher;
 
 
 
-Route::get('/', function () {
-    $researchers = Researcher::orderBy('name')->get();
-    $researches = Research::orderBy('published_at', 'desc')->get(5);
+Route::get('/', function (Request $request) {
 
-    return view('welcome', compact('researches', 'researchers'));
+
+    $sort = $request->query('sort') || 'newest';
+
+    $researchers = Researcher::orderBy('name')->limit(4)->get();
+    $populars = Research::orderBy('views', 'desc')->limit(4)->with('researcher')->get();
+    $researches = Research::with('researcher')
+        ->orderBy($sort == 'popular' ? 'views' : 'created_at', 'desc')
+        ->limit(4)->get();
+
+    return view('welcome', compact('researches', 'populars', 'researchers'));
 })->name('welcome');
 
 Route::middleware('auth')->group(function () {
@@ -50,6 +58,14 @@ Route::group([
     Route::post('/research/search', [ResearcherResearchController::class, 'search'])->name('research.search');
     Route::post('/research/cancel', [ResearcherResearchController::class, 'cancel'])->name('research.cancel');
     Route::post('/research/confirm', [ResearcherResearchController::class, 'confirm'])->name('research.confirm');
+
+    Route::post('/publication/search', [ResearcherPublicationController::class, 'search'])->name('publication.search');
+    Route::post('/publication/cancel', [ResearcherPublicationController::class, 'cancel'])->name('publication.cancel');
+    Route::post('/publication/confirm', [ResearcherPublicationController::class, 'confirm'])->name('publication.confirm');
+
+    Route::post('/patent/search', [ResearcherPatentController::class, 'search'])->name('patent.search');
+    Route::post('/patent/cancel', [ResearcherPatentController::class, 'cancel'])->name('patent.cancel');
+    Route::post('/patent/confirm', [ResearcherPatentController::class, 'confirm'])->name('patent.confirm');
 
     Route::resources([
         'research' => ResearcherResearchController::class,

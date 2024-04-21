@@ -27,7 +27,22 @@ class StoreResearchRequest extends FormRequest
             'location' => ['required', 'string', 'max:255'],
             'published_at' => ['required', 'date', 'before_or_equal:today'],
             'research_type_id' => ['required', 'integer', 'exists:research_types,id'],
-            'research_ field_id' => ['required', 'integer', 'exists:research_fields,id'],
+            'research_field_id' => ['required', 'integer', 'exists:research_fields,id'],
+        ];
+    }
+
+    /**
+     * Set the attributes naming for localization.
+     */
+    public function attributes(): array
+    {
+        return [
+            'title' => __('Judul Penelitian'),
+            'abstract' => __('Abstrak Penelitian'),
+            'location' => __('Lokasi Penelitian'),
+            'published_at' => __('Tanggal Publikasi Penelitian'),
+            'research_type_id' => __('Tipe Penelitian'),
+            'research_field_id' => __('Bidang Penelitian'),
         ];
     }
 }

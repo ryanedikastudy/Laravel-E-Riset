@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('researchers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->unique();
             $table->string('identifier')->unique();
             $table->date('dob')->nullable();
             $table->string('phone')->nullable();

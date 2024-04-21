@@ -33,7 +33,7 @@
             <table>
                 <thead>
                     <tr class="text-sm [&>th]:px-6 [&>th]:py-4">
-                        <th class="w-auto text-start">{{ __('Title & Abstrak') }}</th>
+                        <th class="w-auto text-start">{{ __('Judul dan Abstrak Riset') }}</th>
                         <th class="w-40 text-start">{{ __('Status') }}</th>
                         <th class="w-40">{{ __('Aksi') }}</th>
                     </tr>

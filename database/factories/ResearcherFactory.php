@@ -17,7 +17,13 @@ class ResearcherFactory extends Factory
     public function definition(): array
     {
         return [
-            'identifier' => fake()->nik()
+            'identifier' => fake()->nik(),
+            'dob' => fake()->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),
+            'phone' => fake()->phoneNumber(),
+            'address' => fake()->address(),
+            'religion' => fake()->randomElement(['islam', 'kristen', 'katolik', 'hindu', 'budha', 'konghucu']),
+            'nationality' => fake()->randomElement(['indonesia', 'other']),
+            'gender' => fake()->randomElement(['male', 'female']),
         ];
     }
 }

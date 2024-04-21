@@ -26,9 +26,45 @@
                     </div>
                 </div>
 
-                <a href="{{ route('login') }}">
-                    <x-button variant="primary">{{ __('Masuk') }}</x-button>
-                </a>
+                @auth
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <div
+                                class="flex items-center justify-center w-10 h-10 overflow-hidden bg-white border border-gray-300 rounded-full cursor-pointer hover:border-primary-500">
+                                @if (Auth::user()->photo)
+                                    <img src="{{ asset(Auth::user()->photo) }}" alt="Profil"
+                                        class="object-cover w-full h-full">
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary-500">
+                                        <circle cx="12" cy="8" r="5" />
+                                        <path d="M20 21a8 8 0 0 0-16 0" />
+                                    </svg>
+                                @endif
+                            </div>
+                        </x-slot>
+
+                        <x-slot name="content">
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Profil') }}
+                            </x-dropdown-link>
+
+
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                    {{ __('Keluar') }}
+                                </x-dropdown-link>
+                            </form>
+                        </x-slot>
+                    </x-dropdown>
+                @else
+                    <a href="{{ route('login') }}">
+                        <x-button variant="primary">{{ __('Masuk') }}</x-button>
+                    </a>
+                @endauth
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<div x-data="{ open: $persist(true).as('sidebar') }" x-bind:class="{ 'lg:w-72': open }"
+<div x-data="{ open: $persist(false).as('sidebar') }" x-bind:class="{ 'lg:w-72': open }" x-cloak
     class="relative flex-none font-medium text-gray-500 transition duration-150 ease-in-out bg-white border-r border-gray-200 lg:w-72">
 
     <div class="flex flex-col px-4 py-20 space-y-4 leading-tight">
@@ -14,7 +14,7 @@
 
         <a href="{{ route('researcher.dashboard.index') }}"
             class="flex items-center p-3 space-x-4 rounded-md cursor-pointer hover:bg-gray-100
-            @if (request()->routeIs('dashboard.*')) bg-gray-100 @endif">
+            @if (request()->routeIs('researcher.dashboard.*')) bg-gray-100 @endif">
 
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">

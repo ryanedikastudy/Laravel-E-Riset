@@ -62,19 +62,18 @@
                 <div class="flex flex-col divide-y divide-gray-200">
                     @foreach ($researches as $research)
                         <a href="{{ route('researcher.research.show', $research['id']) }}"
-                            class="flex-col p-6 space-y-4">
+                            class="flex flex-col p-6 space-y-2">
                             <h3 class="font-medium text-primary-500">
-                                {{ \Illuminate\Support\Str::headline($research['title']) }}
+                                {{ \Illuminate\Support\Str::headline($research->title) }}
                             </h3>
-
-                            <p class="text-sm text-gray-500">
-                                {{ \Illuminate\Support\Str::words($research['abstract'], 25) }}
-                            </p>
+                            <h4 class="text-sm font-medium">
+                                {{ $research->researcher->user->name }}
+                            </h4>
 
                             <div class="flex items-center text-sm text-gray-500">
                                 <span>
                                     {{ __('Dipublikasi pada') }}
-                                    {{ \Carbon\Carbon::parse($research['published_at'])->format('Y') }}
+                                    {{ \Carbon\Carbon::parse($research->published_at)->format('Y') }}
                                 </span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -83,7 +82,7 @@
                                 </svg>
                                 <span>
                                     {{ __('Dilihat sebanyak') }}
-                                    {{ $research['views'] }}
+                                    {{ $research->views }}
                                     {{ __('kali') }}
                                 </span>
                             </div>
