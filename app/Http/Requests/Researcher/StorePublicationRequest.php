@@ -35,6 +35,7 @@ class StorePublicationRequest extends FormRequest
     public function attributes(): array
     {
         return [
+            'research_id' => __('Judul Riset Terkait'),
             'title' => __('Judul Publikasi'),
             'document' => __('Dokumen Publikasi'),
             'published_at' => __('Tanggal Publikasi'),

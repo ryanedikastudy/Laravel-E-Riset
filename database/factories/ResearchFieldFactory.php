@@ -17,7 +17,7 @@ class ResearchFieldFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => \Illuminate\Support\Str::headline(fake()->words(2, true)),
+            'name' => \Illuminate\Support\Str::headline(fake()->words(4, true)),
             'description' => fake()->text(),
         ];
     }

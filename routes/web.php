@@ -58,7 +58,7 @@ Route::group([
     'prefix' => __('dashboard'),
     'middleware' => ['auth', 'verified'],
 ], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::group([
         'prefix' => __('riset'),
@@ -70,7 +70,8 @@ Route::group([
     });
 
     Route::resource(__('riset'), ResearchController::class)
-        ->except(['show', 'edit', 'update', 'destroy'])
+        ->except(['edit', 'update', 'destroy'])
+        ->parameters([__('riset') => 'research'])
         ->names('research');
 
     Route::group([
@@ -83,7 +84,8 @@ Route::group([
     });
 
     Route::resource(__('publikasi'), PublicationController::class)
-        ->except(['show', 'edit', 'update', 'destroy'])
+        ->except(['edit', 'update', 'destroy'])
+        ->parameters([__('publikasi') => 'publication'])
         ->names('publication');
 
     Route::group([
@@ -96,7 +98,8 @@ Route::group([
     });
 
     Route::resource(__('paten'), PatentController::class)
-        ->except(['show', 'edit', 'update', 'destroy'])
+        ->except(['edit', 'update', 'destroy'])
+        ->parameters([__('paten') => 'patent'])
         ->names('patent');
 });
 

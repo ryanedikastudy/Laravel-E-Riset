@@ -62,7 +62,7 @@
                     <x-select id="research_type_id" class="block w-full mt-1" name="research_type_id" required
                         autocomplete="research_type_id" :value="old('type')">
 
-                        <option @if (old('research_type_id') == '') selected @endif value="">
+                        <option @if (old('research_type_id') == '') selected @endif value="" disabled>
                             {{ __('Pilih Tipe Penelitian') }}
                         </option>
 
@@ -81,7 +81,7 @@
                     <x-select id="research_field_id" class="block w-full mt-1" name="research_field_id" required
                         autocomplete="research_field_id" :value="old('field')">
 
-                        <option @if (old('research_field_id') == '') selected @endif value="">
+                        <option @if (old('research_field_id') == '') selected @endif value="" disabled>
                             {{ __('Pilih Bidang Penelitian') }}
                         </option>
 
@@ -114,7 +114,7 @@
 
         <div class="flex items-center justify-end space-x-4">
             <x-button variant="primary">{{ __('Simpan') }}</x-button>
-            <x-button variant="ghost" type="reset">{{ __('Batal') }}</x-button>
+            <x-button variant="ghost" type="reset">{{ __('Reset') }}</x-button>
         </div>
     </form>
 </x-app-layout>

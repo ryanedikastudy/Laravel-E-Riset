@@ -53,11 +53,7 @@ class ResearchController extends Controller
     public function create(Request $request): View
     {
         $stored = $request->session()->get('temp-research');
-
-        if ($stored) return view('researcher.research.confirm', [
-            'user' => $request->user(),
-            'research' => $stored,
-        ]);
+        if ($stored) return view('researcher.research.confirm');
 
         return view('researcher.research.create', [
             'user' => $request->user(),
@@ -69,9 +65,11 @@ class ResearchController extends Controller
     /**
      * Confirm the creation of a new resource.
      */
-    public function confirm(Request $request): View
+    public function confirm(Request $request): View | RedirectResponse
     {
         $stored = $request->session()->get('temp-research');
+        if (!$stored) return redirect()->route('researcher.research.create');
+
         $request->user()->researcher->researches()->create($stored);
         $request->session()->forget('temp-research');
 
@@ -83,8 +81,11 @@ class ResearchController extends Controller
     /**
      * Cancel the creation of a new resource.
      */
-    public function cancel(Request $request): View
+    public function cancel(Request $request): View | RedirectResponse
     {
+        $stored = $request->session()->get('temp-research');
+        if (!$stored) return redirect()->route('researcher.research.create');
+
         $request->session()->forget('temp-research');
 
         return view('researcher.research.cancel', [
@@ -97,19 +98,23 @@ class ResearchController extends Controller
      */
     public function store(StoreResearchRequest $request): View
     {
+        $stored = $request->session()->get('temp-research');
+        if ($stored) return view('researcher.research.confirm');
+
         $request->session()->put('temp-research', $request->all());
 
-        return view('researcher.research.confirm', [
-            'user' => $request->user(),
-        ]);
+        return view('researcher.research.confirm');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Research $research)
+    public function show(Request $request, Research $research): View
     {
-        //
+        return view('researcher.research.show', [
+            'user' => $request->user(),
+            'research' => $research,
+        ]);
     }
 
     /**

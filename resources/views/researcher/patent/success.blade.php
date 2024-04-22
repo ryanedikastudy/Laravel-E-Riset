@@ -1,5 +1,5 @@
 <x-app-layout>
-    <h1 class="mb-2 text-4xl font-bold">{{ __('Upload Riset') }}</h1>
+    <h1 class="mb-2 text-4xl font-bold">{{ __('Upload Paten') }}</h1>
     <p class="text-gray-600 mb-14">
         {{ __('Lorem ipsum dolor sit amet consectetur adipisicing elit. In iure repellendus, illum aliquid ab amet cupiditate nisi odit molestias! Corrupti!') }}
     </p>
@@ -39,13 +39,13 @@
 
             <div class="p-8">
                 <p class="text-sm text-gray-500">
-                    {{ __('Risetmu sudah dikirimkan kepada tim admin untuk melalui proses approval. Lakukan pemeriksaan secara berkala pada akunmu untuk melihat pembaruan status approval risetmu. Terima kasih atas kontribusi Anda!') }}
+                    {{ __('Patenmu sudah dikirimkan kepada tim admin untuk melalui proses approval. Lakukan pemeriksaan secara berkala pada akunmu untuk melihat pembaruan status approval patenmu. Terima kasih atas kontribusi Anda!') }}
                 </p>
             </div>
         </div>
 
         <div class="flex items-center justify-end space-x-2">
-            <a href="{{ route('researcher.research.index') }}">
+            <a href="{{ route('researcher.patent.index') }}">
                 <x-button variant="primary">{{ __('Selesai') }}</x-button>
             </a>
         </div>

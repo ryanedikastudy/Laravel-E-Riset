@@ -1,15 +1,15 @@
 <x-app-layout>
-    <h1 class="mb-2 text-4xl font-bold">{{ __('Kelola Riset') }}</h1>
+    <h1 class="mb-2 text-4xl font-bold">{{ __('Kelola Paten') }}</h1>
     <p class="text-gray-600 mb-14">
         {{ __('Lorem ipsum dolor sit amet consectetur adipisicing elit. In iure repellendus, illum aliquid ab amet cupiditate nisi odit molestias! Corrupti!') }}
     </p>
 
     <div class="p-8 bg-white rounded-lg shadow">
         <div class="flex items-center justify-between mb-8">
-            <h2 class="text-lg font-bold">{{ __('Riset Saya') }}</h2>
+            <h2 class="text-lg font-bold">{{ __('Paten Saya') }}</h2>
 
             <div class="flex items-center space-x-4">
-                <form class="relative w-60" method="post" action="{{ route('researcher.research.search') }}">
+                <form class="relative w-60" method="post" action="{{ route('researcher.patent.search') }}">
                     @csrf
                     <x-text-input class="w-full" placeholder="Search..." name="search" value="{{ $search }}">
                     </x-text-input>
@@ -23,7 +23,7 @@
                     </button>
                 </form>
 
-                <a href ="{{ route('researcher.research.create') }}">
+                <a href ="{{ route('researcher.patent.create') }}">
                     <x-button variant="primary">{{ __('Upload Baru') }}</x-button>
                 </a>
             </div>
@@ -33,27 +33,27 @@
             <table>
                 <thead>
                     <tr class="text-sm [&>th]:px-6 [&>th]:py-4">
-                        <th class="w-auto text-start">{{ __('Title & Abstrak') }}</th>
+                        <th class="w-full text-start">{{ __('Judul Paten') }}</th>
                         <th class="w-40 text-start">{{ __('Status') }}</th>
                         <th class="w-40">{{ __('Aksi') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($researches as $research)
+                    @foreach ($patents as $patent)
                         <tr class="border-t border-gray-200 [&>td]:px-6 [&>td]:py-4">
                             <td>
                                 <h5 class="mb-2 font-semibold text-md text-primary-500">
-                                    {{ \Illuminate\Support\Str::headline($research->title) }}
+                                    {{ \Illuminate\Support\Str::headline($patent->title) }}
                                 </h5>
                                 <p class="text-sm text-gray-500">
-                                    {{ \Illuminate\Support\Str::words($research->abstract, 25) }}
+                                    {{ \Illuminate\Support\Str::headline($patent->research->title) }}
                                 </p>
                             </td>
                             <td class="text-sm font-medium text-yellow-500">
-                                {{ \Illuminate\Support\Str::upper($research->status) }}
+                                {{ \Illuminate\Support\Str::upper($patent->status) }}
                             </td>
                             <td>
-                                <a href="{{ route('research.show', $research->id) }}">
+                                <a href="{{ route('researcher.patent.show', $patent->id) }}">
                                     <x-button variant="primary">{{ __('Lihat Detail') }}</x-button>
                                 </a>
                             </td>
@@ -63,6 +63,6 @@
             </table>
         </div>
 
-        {{ $researches->links() }}
+        {{ $patents->links() }}
     </div>
 </x-app-layout>

@@ -10,14 +10,13 @@
     <form method="post" action="{{ route('researcher.publication.store') }}"
         class="grid gap-8 p-8 bg-white rounded-lg shadow" x-data="{
             $show: false,
-            $refs: { document: null, preview: null },
+            $refs: { document: null, preview: null, reset: null },
             init() {
                 this.$refs.document.addEventListener('change', e => {
                     this.$show = true;
                     $url = URL.createObjectURL(e.target.files[0]);
                     PDFObject.embed($url, $refs.preview, {
                         download: false,
-                        page: 1,
                         height: '100%',
                         width: '100%',
                         view: 'Fit',
@@ -32,6 +31,12 @@
                             });
                         }
                     });
+                })
+        
+                this.$refs.reset.addEventListener('click', e => {
+                    this.$refs.document.value = null;
+                    this.$refs.preview.src = '';
+                    this.$show = false;
                 })
             }
         }" x-init="init()"
@@ -74,7 +79,7 @@
                     <x-select id="research_id" class="block w-full mt-1" name="research_id" required
                         autocomplete="research_id" :value="old('research_id')">
 
-                        <option @if (old('research_id') == '') selected @endif value="">
+                        <option @if (old('research_id') == '') selected @endif value="" disabled>
                             {{ __('Pilih Judul Penelitian') }}
                         </option>
 
@@ -112,32 +117,46 @@
                 </div>
 
                 <!-- Document -->
-                <div class="flex items-center justify-center border border-gray-200 rounded-md cursor-pointer h-80 col-span-full"
-                    x-on:click="$refs.document.click()">
-                    <x-text-input id="document" class="hidden" name="document" accept="application/pdf"
-                        x-ref="document" type="file" />
+                <div class="col-span-full">
+                    <x-input-label for="document" :value="__('Dokumen Paten')" />
+                    <div
+                        class="relative flex items-center justify-center border border-gray-200 rounded-md col-span-full aspect-video">
 
-                    <span class="flex items-center text-sm text-gray-500" x-show="$show == false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="w-4 h-4 mr-2">
-                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
-                            <path d="m9 9.5 2 2 4-4" />
-                        </svg>
-                        {{ __('Upload dokumen') }}
-                    </span>
+                        <div class="absolute bottom-0 right-0 z-10 m-4" x-show="$show">
+                            <x-button type="button" x-on:click="$refs.document.click()" size="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                    <path d="M3 3v5h5" />
+                                </svg>
+                            </x-button>
+                        </div>
 
-                    <div x-ref="preview" class="w-full h-full" x-show="$show == true"> </div>
+                        <x-text-input id="document" class="hidden" name="document" accept="application/pdf"
+                            x-ref="document" type="file" />
+
+                        <x-button class="flex items-center text-sm text-gray-500" x-show="!$show"
+                            x-on:click="$refs.document.click()" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-5 h-5 mr-2">
+                                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+                                <path d="m9 9.5 2 2 4-4" />
+                            </svg>
+                            {{ __('Upload dokumen') }}
+                        </x-button>
+
+                        <div x-ref="preview" class="w-full h-full" x-show="$show"> </div>
+                    </div>
+                    <x-input-error :messages="$errors->get('document')" class="mt-2" />
                 </div>
             </div>
         </div>
 
         <div class="flex items-center justify-end space-x-4">
             <x-button variant="primary">{{ __('Simpan') }}</x-button>
-            <x-button variant="outline" type="button" x-on:click="$refs.document.click()">
-                {{ __('Change') }}
-            </x-button>
-            <x-button variant="ghost" type="reset">{{ __('Batal') }}</x-button>
+            <x-button variant="ghost" type="reset" x-ref="reset">{{ __('Reset') }}</x-button>
         </div>
     </form>
 

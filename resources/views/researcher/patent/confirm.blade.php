@@ -1,5 +1,5 @@
 <x-app-layout>
-    <h1 class="mb-2 text-4xl font-bold">{{ __('Upload Riset') }}</h1>
+    <h1 class="mb-2 text-4xl font-bold">{{ __('Upload Paten') }}</h1>
     <p class="text-gray-600 mb-14">
         {{ __('Lorem ipsum dolor sit amet consectetur adipisicing elit. In iure repellendus, illum aliquid ab amet cupiditate nisi odit molestias! Corrupti!') }}
     </p>
@@ -39,20 +39,18 @@
 
             <div class="p-8">
                 <p class="text-sm text-gray-500">
-                    Risetmu sudah diupload dan dapat dikirimkan kepada tim admin untuk proses approval. Anda dapat
-                    memeriksa kembali informasi yang telah diinputkan sebelum melakukan konfirmasi. Jika sudah yakin,
-                    klik ”Simpan".
+                    {{ __('Patenmu sudah diupload dan dapat dikirimkan kepada tim admin untuk proses approval. Anda dapat memeriksa kembali informasi yang telah diinputkan sebelum melakukan konfirmasi. Jika sudah yakin, klik “Selesai”.') }}
                 </p>
             </div>
         </div>
 
         <div class="flex items-center justify-end space-x-2">
-            <form method="post" action="{{ route('researcher.research.confirm') }}">
+            <form method="post" action="{{ route('researcher.patent.confirm') }}">
                 @csrf
                 <x-button variant="primary">{{ __('Simpan') }}</x-button>
             </form>
 
-            <form method="post" action="{{ route('researcher.research.cancel') }}">
+            <form method="post" action="{{ route('researcher.patent.cancel') }}">
                 @csrf
                 <x-button variant="ghost">{{ __('Batal') }}</x-button>
             </form>

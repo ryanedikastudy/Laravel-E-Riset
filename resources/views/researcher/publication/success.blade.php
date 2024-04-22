@@ -1,5 +1,5 @@
 <x-app-layout>
-    <h1 class="mb-2 text-4xl font-bold">{{ __('Upload Riset') }}</h1>
+    <h1 class="mb-2 text-4xl font-bold">{{ __('Upload Publikasi') }}</h1>
     <p class="text-gray-600 mb-14">
         {{ __('Lorem ipsum dolor sit amet consectetur adipisicing elit. In iure repellendus, illum aliquid ab amet cupiditate nisi odit molestias! Corrupti!') }}
     </p>

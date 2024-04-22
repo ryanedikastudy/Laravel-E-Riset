@@ -51,13 +51,9 @@ class PublicationController extends Controller
     public function create(Request $request): View
     {
         $stored = $request->session()->get('temp-publication');
-        if ($stored) return view('researcher.publication.confirm', [
-            'user' => $request->user(),
-            'publication' => $stored,
-        ]);
+        if ($stored) return view('researcher.publication.confirm');
 
         return view('researcher.publication.create', [
-            'user' => $request->user(),
             'researches' => $request->user()->researcher->researches()->get(),
         ]);
     }
@@ -65,7 +61,7 @@ class PublicationController extends Controller
     /**
      * Confirm the creation of a new resource.
      */
-    public function confirm(Request $request): View
+    public function confirm(Request $request): View | RedirectResponse
     {
         $stored = $request->session()->get('temp-publication');
         if (!$stored) return redirect()->route('researcher.publication.create');
@@ -73,15 +69,13 @@ class PublicationController extends Controller
         $request->user()->researcher->publications()->create($stored);
         $request->session()->forget('temp-publication');
 
-        return view('researcher.publication.success', [
-            'user' => $request->user(),
-        ]);
+        return view('researcher.publication.success');
     }
 
     /**
      * Cancel the creation of a new resource.
      */
-    public function cancel(Request $request): View
+    public function cancel(Request $request): View | RedirectResponse
     {
         $stored = $request->session()->get('temp-publication');
         if (!$stored) return redirect()->route('researcher.publication.create');
@@ -89,9 +83,7 @@ class PublicationController extends Controller
         Storage::delete($stored['document']);
         $request->session()->forget('temp-publication');
 
-        return view('researcher.publication.cancel', [
-            'user' => $request->user(),
-        ]);
+        return view('researcher.publication.cancel');
     }
 
     /**
@@ -99,24 +91,27 @@ class PublicationController extends Controller
      */
     public function store(StorePublicationRequest $request): View
     {
+        $stored = $request->session()->get('temp-publication');
+        if ($stored) return view('researcher.publication.confirm');
+
         $filename = $request->document->store('documents');
-        $stored = $request->session()->put('temp-publication', array_merge(
+        $request->session()->put('temp-publication', array_merge(
             $request->except('document'),
             ['document' => $filename]
         ));
 
-        return view('researcher.publication.confirm', [
-            'user' => $request->user(),
-            'publication' => $stored,
-        ]);
+        return view('researcher.publication.confirm');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Publication $publication)
+    public function show(Request $request, Publication $publication): View
     {
-        //
+        return view('researcher.publication.show', [
+            'user' => $request->user(),
+            'publication' => $publication,
+        ]);
     }
 
     /**

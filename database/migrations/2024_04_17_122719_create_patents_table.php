@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('research_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->string('document');
+            $table->integer('pages')->default(0);
             $table->date('published_at')->nullable();
             $table->enum('status', ['verified', 'unverified'])->default('unverified');
             $table->integer('views')->default(0);
