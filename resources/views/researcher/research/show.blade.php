@@ -45,7 +45,7 @@
                         $color = $research->status == 'verified' ? 'text-green-500' : 'text-yellow-500';
                     @endphp
                     <span class="font-medium uppercase {{ $color }}">
-                        {{ $research->status }}
+                        {{ __($research->status) }}
                     </span>
                 </div>
 

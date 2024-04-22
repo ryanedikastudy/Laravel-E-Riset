@@ -54,7 +54,10 @@ class PatentController extends Controller
         if ($stored) return view('researcher.patent.confirm');
 
         return view('researcher.patent.create', [
-            'researches' => $request->user()->researcher->researches()->get(),
+            'researches' => $request->user()->researcher
+                ->researches()
+                ->where('status', 'verified')
+                ->get()
         ]);
     }
 

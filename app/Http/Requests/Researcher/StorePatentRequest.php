@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Researcher;
 
+use App\Models\Research;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StorePatentRequest extends FormRequest
 {
@@ -22,7 +25,11 @@ class StorePatentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'research_id' => ['required', 'integer', 'exists:research,id',],
+            'research_id' => [
+                'required',
+                'integer',
+                Rule::in($this->user()->researcher->researches()->where('status', 'verified')->pluck('id'))
+            ],
             'title' => ['required', 'string', 'max:255'],
             'document' => ['required', 'file', 'mimes:pdf', 'max:102400'],
             'published_at' => ['required', 'date', 'before_or_equal:today'],

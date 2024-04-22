@@ -32,8 +32,8 @@
             <table>
                 <thead>
                     <tr class="text-sm [&>th]:px-6 [&>th]:py-4">
-                        <th class="w-full text-start">{{ __('Judul dan Abstrak Riset') }}</th>
-                        <th class="w-40 text-start">{{ __('Status') }}</th>
+                        <th class="w-auto text-start">{{ __('Judul dan Abstrak Riset') }}</th>
+                        <th class="w-60 text-start">{{ __('Status') }}</th>
                         <th class="w-40">{{ __('Aksi') }}</th>
                     </tr>
                 </thead>
@@ -52,8 +52,8 @@
                             @php
                                 $color = $research->status == 'verified' ? 'text-green-500' : 'text-yellow-500';
                             @endphp
-                            <td class="text-sm font-medium {{ $color }}">
-                                {{ \Illuminate\Support\Str::upper($research->status) }}
+                            <td class="text-sm font-medium uppercase {{ $color }}">
+                                {{ __($research->status) }}
                             </td>
 
                             <td>

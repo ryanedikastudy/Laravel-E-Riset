@@ -54,7 +54,10 @@ class PublicationController extends Controller
         if ($stored) return view('researcher.publication.confirm');
 
         return view('researcher.publication.create', [
-            'researches' => $request->user()->researcher->researches()->get(),
+            'researches' => $request->user()->researcher
+                ->researches()
+                ->where('status', 'verified')
+                ->get()
         ]);
     }
 

@@ -51,7 +51,7 @@
                         $color = $patent->status == 'verified' ? 'text-green-500' : 'text-yellow-500';
                     @endphp
                     <span class="font-medium text-yellow-500 {{ $color }}">
-                        {{ $patent->status }}
+                        {{ __($patent->status) }}
                     </span>
                 </div>
 
