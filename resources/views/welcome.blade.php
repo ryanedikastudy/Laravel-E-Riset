@@ -155,11 +155,15 @@
                                         {{ __('kali') }}
                                     </span>
                                 </div>
+
+                                <p class="text-sm text-yellow-500">
+                                    {{ __('Bidang Riset') }}: {{ $research->field->name }}
+                                </p>
                             </a>
                         @endforeach
                     </div>
 
-                    <a href="#" class="flex justify-center">
+                    <a href="{{ route('research.index') }}" class="flex justify-center">
                         <x-button variant="primary">
                             {{ __('Lihat Selengkapnya') }}
                         </x-button>
@@ -176,7 +180,7 @@
         </p>
 
         <div class="compact">
-            <div class="grid grid-cols-1 gap-6 mb-14 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8">
+            <div class="grid gap-8 mb-8 md:grid-cols-3 lg:grid-cols-5">
                 @foreach ($researchers as $researcher)
                     <div class="flex flex-col items-center p-6 bg-white border border-gray-300 rounded-lg">
                         <div
@@ -194,24 +198,22 @@
                             @endif
                         </div>
 
-                        <div class="mb-6 text-center">
-                            <h3 class="font-medium text-primary-500">
+                        <div class="text-center">
+                            <h3 class="font-medium text-primary-500 line-clamp-1">
                                 {{ \Illuminate\Support\Str::headline($researcher->user->name) }}
                             </h3>
-                        </div>
-
-                        <div class="flex justify-center">
-                            <a href="#">
-                                <x-button variant="primary">
-                                    {{ __('Lihat Detail') }}
-                                </x-button>
-                            </a>
+                            <p class="mb-4 text-sm font-medium">
+                                {{ \Illuminate\Support\Str::headline($researcher->nationality) }}
+                            </p>
+                            <p class="text-sm text-gray-500">
+                                {{ __('Jumlah Riset') }}: {{ $researcher->researches_count }}
+                            </p>
                         </div>
                     </div>
                 @endforeach
             </div>
 
-            <a href="#" class="flex justify-center">
+            <a href="{{ route('researcher.index') }}" class="flex justify-center">
                 <x-button variant="outline" class="text-white border-white">
                     {{ __('Lihat Selengkapnya') }}
                 </x-button>

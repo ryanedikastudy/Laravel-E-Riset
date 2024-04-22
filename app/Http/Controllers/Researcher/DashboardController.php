@@ -20,11 +20,22 @@ class DashboardController extends Controller
             'patent' => $request->user()->researcher->patents()->get()->count(),
         ];
 
-        $researches = $request->user()->researcher->researches()->with('researcher')->limit(3)->get();
+        $researches = $request->user()->researcher
+            ->researches()
+            ->with('researcher', 'field')
+            ->limit(4)
+            ->get();
+
+        $publications = $request->user()->researcher
+            ->publications()
+            ->with('research')
+            ->limit(4)
+            ->get();
 
         return view('researcher.dashboard.index', [
             'counts' => $counts,
             'researches' => $researches,
+            'publications' => $publications
         ]);
     }
 }

@@ -18,7 +18,7 @@ class ResearchFactory extends Factory
     {
         return [
             "title" => fake()->words(15, true),
-            "abstract" => fake()->paragraphs(5, true),
+            "abstract" => fake()->paragraphs(8, true),
             "location" => fake()->address(),
             "published_at" => fake()->dateTimeBetween('-1 year', 'now'),
             "views" => rand(0, 100),

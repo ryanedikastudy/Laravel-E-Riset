@@ -31,8 +31,8 @@ Route::group([
     'prefix' => __('riset'),
 ], function () {
     Route::get('/', [GuestResearchController::class, 'index'])->name('index');
-    Route::get('/{id}', [GuestResearchController::class, 'show'])->name('show');
-    Route::get(__('cari'), [GuestResearchController::class, 'search'])->name('search');
+    Route::get('/{research}', [GuestResearchController::class, 'show'])->name('show');
+    Route::post(__('cari'), [GuestResearchController::class, 'search'])->name('search');
 });
 
 Route::group([
@@ -40,8 +40,7 @@ Route::group([
     'prefix' => __('peneliti'),
 ], function () {
     Route::get('/', [GuestResearcherController::class, 'index'])->name('index');
-    Route::get('/{id}', [GuestResearcherController::class, 'show'])->name('show');
-    Route::get(__('cari'), [GuestResearcherController::class, 'search'])->name('search');
+    Route::post(__('cari'), [GuestResearcherController::class, 'search'])->name('search');
 });
 
 Route::group([

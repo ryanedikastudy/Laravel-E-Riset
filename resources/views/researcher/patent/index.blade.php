@@ -49,9 +49,14 @@
                                     {{ \Illuminate\Support\Str::headline($patent->research->title) }}
                                 </p>
                             </td>
-                            <td class="text-sm font-medium text-yellow-500">
+
+                            @php
+                                $color = $patent->status == 'verified' ? 'text-green-500' : 'text-yellow-500';
+                            @endphp
+                            <td class="text-sm font-medium {{ $color }}">
                                 {{ \Illuminate\Support\Str::upper($patent->status) }}
                             </td>
+
                             <td>
                                 <a href="{{ route('researcher.patent.show', $patent->id) }}">
                                     <x-button variant="primary">{{ __('Lihat Detail') }}</x-button>

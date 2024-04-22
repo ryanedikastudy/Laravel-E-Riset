@@ -11,8 +11,7 @@
             <div class="flex items-center space-x-4">
                 <form class="relative w-60" method="post" action="{{ route('researcher.research.search') }}">
                     @csrf
-                    <x-text-input class="w-full" placeholder="Search..." name="search" value="{{ $search }}">
-                    </x-text-input>
+                    <x-text-input class="w-full" placeholder="Search..." name="search" value="{{ $search }}" />
                     <button type="submit"
                         class="absolute flex items-center justify-center w-6 h-6 -translate-y-1/2 rounded-full top-1/2 right-2 text-primary-500">
                         <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor"
@@ -49,9 +48,14 @@
                                     {{ \Illuminate\Support\Str::words($research->abstract, 25) }}
                                 </p>
                             </td>
-                            <td class="text-sm font-medium text-yellow-500">
+
+                            @php
+                                $color = $research->status == 'verified' ? 'text-green-500' : 'text-yellow-500';
+                            @endphp
+                            <td class="text-sm font-medium {{ $color }}">
                                 {{ \Illuminate\Support\Str::upper($research->status) }}
                             </td>
+
                             <td>
                                 <a href="{{ route('researcher.research.show', $research->id) }}">
                                     <x-button variant="primary">{{ __('Lihat Detail') }}</x-button>

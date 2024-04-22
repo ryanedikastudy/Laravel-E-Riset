@@ -16,8 +16,18 @@ class HomeController extends Controller
     {
         $sort = $request->query('sort') ?? 'newest';
 
-        $researchers = Researcher::with('user')->orderBy('name')->limit(4)->get();
-        $populars = Research::orderBy('views', 'desc')->with('researcher.user')->limit(4)->get();
+        $researchers = Researcher::where('status', 'verified')
+            ->withCount('researches')
+            ->inRandomOrder()
+            ->with('user')
+            ->limit(5)
+            ->get();
+
+        $populars = Research::orderBy('views', 'desc')
+            ->with('researcher.user')
+            ->limit(4)
+            ->get();
+
         $researches = Research::with('researcher.user')
             ->orderBy($sort == 'popular' ? 'views' : 'published_at', 'desc')
             ->limit(4)->get();

@@ -47,7 +47,10 @@
             <div class="flex flex-col space-y-8">
                 <div>
                     <h2 class="font-medium text-gray-400">{{ __('Status Paten') }}</h2>
-                    <span class="font-medium text-yellow-500 uppercase">
+                    @php
+                        $color = $patent->status == 'verified' ? 'text-green-500' : 'text-yellow-500';
+                    @endphp
+                    <span class="font-medium text-yellow-500 {{ $color }}">
                         {{ $patent->status }}
                     </span>
                 </div>

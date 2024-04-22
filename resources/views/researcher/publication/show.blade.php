@@ -47,7 +47,10 @@
             <div class="flex flex-col space-y-8">
                 <div>
                     <h2 class="font-medium text-gray-400">{{ __('Status Publikasi') }}</h2>
-                    <span class="font-medium text-yellow-500 uppercase">
+                    @php
+                        $color = $publication->status == 'verified' ? 'text-green-500' : 'text-yellow-500';
+                    @endphp
+                    <span class="font-medium uppercase {{ $color }}">
                         {{ $publication->status }}
                     </span>
                 </div>

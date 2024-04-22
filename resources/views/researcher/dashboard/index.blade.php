@@ -5,7 +5,8 @@
     </p>
 
     <div class="p-8 bg-white rounded-lg shadow">
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+        <div class="grid grid-cols-1 gap-8 mb-8 md:grid-cols-2 lg:grid-cols-3">
             <a href="{{ route('researcher.research.index') }}"
                 class="relative px-6 py-4 bg-white border border-gray-200 rounded-lg">
                 <div class="absolute bottom-0 right-0 p-2 m-4 text-white rounded-lg bg-primary-500">
@@ -57,11 +58,15 @@
                 <span class="mb-2 text-5xl font-extrabold">{{ $counts['patent'] }}</span>
                 <p class="font-medium text-gray-500">{{ __('Paten') }}</p>
             </a>
+        </div>
+
+        <div class="grid items-start grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 
             <div class="row-span-2 border border-gray-200 rounded-lg md:col-span-2">
                 <div class="flex flex-col divide-y divide-gray-200">
                     @foreach ($researches as $research)
-                        <a href="{{ route('research.show', $research->id) }}" class="flex flex-col p-6 space-y-2">
+                        <a href="{{ route('researcher.research.show', $research->id) }}"
+                            class="flex flex-col p-6 space-y-2">
                             <h3 class="font-medium text-primary-500">
                                 {{ \Illuminate\Support\Str::headline($research->title) }}
                             </h3>
@@ -83,6 +88,30 @@
                                     {{ __('Dilihat sebanyak') }}
                                     {{ $research->views }}
                                     {{ __('kali') }}
+                                </span>
+                            </div>
+
+                            <p class="text-sm text-yellow-500">
+                                {{ __('Bidang Riset') }}: {{ $research->field->name }}
+                            </p>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="row-span-2 border border-gray-200 rounded-lg ">
+                <div class="flex flex-col divide-y divide-gray-200">
+                    @foreach ($publications as $publication)
+                        <a href="{{ route('researcher.publication.show', $publication->id) }}"
+                            class="flex flex-col p-6 space-y-2">
+                            <h3 class="font-medium text-primary-500">
+                                {{ \Illuminate\Support\Str::headline($publication->title) }}
+                            </h3>
+
+                            <div class="flex flex-col text-sm text-gray-500">
+                                <span>
+                                    {{ __('Dipublikasi pada') }}
+                                    {{ \Carbon\Carbon::parse($publication->published_at)->format('d M Y') }}
                                 </span>
                             </div>
                         </a>

@@ -49,9 +49,14 @@
                                     {{ \Illuminate\Support\Str::headline($publication->research->title) }}
                                 </p>
                             </td>
-                            <td class="text-sm font-medium text-yellow-500">
+
+                            @php
+                                $color = $publication->status == 'verified' ? 'text-green-500' : 'text-yellow-500';
+                            @endphp
+                            <td class="text-sm font-medium {{ $color }}">
                                 {{ \Illuminate\Support\Str::upper($publication->status) }}
                             </td>
+
                             <td>
                                 <a href="{{ route('researcher.publication.show', $publication->id) }}">
                                     <x-button variant="primary">{{ __('Lihat Detail') }}</x-button>

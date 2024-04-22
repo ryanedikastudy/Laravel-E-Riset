@@ -20,30 +20,43 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Researcher::factory()->create([
             'user_id' => $user->id,
+            'status' => 'verified',
         ]);
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $user = \App\Models\User::factory()->create();
+            $status = fake()->randomElement(['verified', 'unverified']);
+
             \App\Models\Researcher::factory()->create([
                 'user_id' => $user->id,
+                'status' => $status,
             ]);
         }
 
         \App\Models\ResearchType::factory(5)->create();
         \App\Models\ResearchField::factory(5)->create();
 
-        \App\Models\Research::factory(10)->create([
-            "researcher_id" => \App\Models\Researcher::first()->id,
-            "research_type_id" => \App\Models\ResearchType::first()->id,
-            "research_field_id" => \App\Models\ResearchField::first()->id,
-        ]);
+        for ($i = 0; $i < 40; $i++) {
+            $researcher = \App\Models\Researcher::inRandomOrder()->first();
+            $field = \App\Models\ResearchField::inRandomOrder()->first();
+            $type = \App\Models\ResearchType::inRandomOrder()->first();
 
-        \App\Models\Publication::factory(5)->create([
-            "research_id" => \App\Models\Research::first()->id,
-        ]);
+            $status = fake()->randomElement(['verified', 'unverified']);
 
-        \App\Models\Patent::factory(5)->create([
-            "research_id" => \App\Models\Research::first()->id,
-        ]);
+            $research = \App\Models\Research::factory()->create([
+                'researcher_id' => $researcher->id,
+                'research_type_id' => $type->id,
+                'research_field_id' => $field->id,
+                'status' => $status,
+            ]);
+
+            \App\Models\Publication::factory(fake()->numberBetween(0, 4))->create([
+                'research_id' => $research->id,
+            ]);
+
+            \App\Models\Patent::factory(fake()->numberBetween(0, 4))->create([
+                'research_id' => $research->id,
+            ]);
+        }
     }
 }
