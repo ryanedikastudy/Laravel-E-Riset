@@ -39,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($publications as $publication)
+                    @forelse ($publications as $publication)
                         <tr class="border-t border-gray-200 [&>td]:px-6 [&>td]:py-4">
                             <td>
                                 <h5 class="mb-2 font-semibold text-md text-primary-500">
@@ -58,7 +58,17 @@
                                 </a>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr class="border-t border-gray-200 [&>td]:px-6 [&>td]:py-4">
+                            <td colspan="3">
+                                <div class="flex items-center justify-center">
+                                    <p class="text-sm text-gray-500">
+                                        {{ __('Belum ada publikasi') }}
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

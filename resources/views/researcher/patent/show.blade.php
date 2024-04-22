@@ -29,10 +29,18 @@
                     </p>
                 </div>
 
-                <div class="overflow-hidden border border-gray-200 rounded-md shadow-sm">
-                    <iframe src="{{ asset($patent->document) }}" width="100%" height="500px" frameborder="0"
-                        allowfullscreen>
-                    </iframe>
+                <div class="overflow-hidden border border-gray-200 rounded-md shadow-sm aspect-video">
+                    @if ($patent->document)
+                        <iframe src="{{ asset($patent->document) }}" width="100%" height="100%" frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    @else
+                        <div class="flex items-center justify-center h-full">
+                            <p class="text-sm text-gray-500">
+                                {{ __('Belum ada dokumen') }}
+                            </p>
+                        </div>
+                    @endif
                 </div>
             </div>
 

@@ -17,7 +17,9 @@ class PublicationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "title" => fake()->words(15, true),
+            "published_at" => fake()->dateTimeBetween('-1 year', 'now'),
+            "views" => rand(0, 100),
         ];
     }
 }

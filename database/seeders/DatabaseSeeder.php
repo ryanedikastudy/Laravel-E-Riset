@@ -37,5 +37,13 @@ class DatabaseSeeder extends Seeder
             "research_type_id" => \App\Models\ResearchType::first()->id,
             "research_field_id" => \App\Models\ResearchField::first()->id,
         ]);
+
+        \App\Models\Publication::factory(5)->create([
+            "research_id" => \App\Models\Research::first()->id,
+        ]);
+
+        \App\Models\Patent::factory(5)->create([
+            "research_id" => \App\Models\Research::first()->id,
+        ]);
     }
 }

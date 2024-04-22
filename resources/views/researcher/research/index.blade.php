@@ -33,13 +33,13 @@
             <table>
                 <thead>
                     <tr class="text-sm [&>th]:px-6 [&>th]:py-4">
-                        <th class="w-auto text-start">{{ __('Judul dan Abstrak Riset') }}</th>
+                        <th class="w-full text-start">{{ __('Judul dan Abstrak Riset') }}</th>
                         <th class="w-40 text-start">{{ __('Status') }}</th>
                         <th class="w-40">{{ __('Aksi') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($researches as $research)
+                    @forelse ($researches as $research)
                         <tr class="border-t border-gray-200 [&>td]:px-6 [&>td]:py-4">
                             <td>
                                 <h5 class="mb-2 font-semibold text-md text-primary-500">
@@ -58,7 +58,17 @@
                                 </a>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr class="border-t border-gray-200 [&>td]:px-6 [&>td]:py-4">
+                            <td colspan="3">
+                                <div class="flex items-center justify-center">
+                                    <p class="text-sm text-gray-500">
+                                        {{ __('Belum ada riset') }}
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
