@@ -32,7 +32,7 @@ class ResearcherController extends Controller
             ->when($count, function ($query) use ($count) {
                 $query->has('researches', '>=', $count);
             })
-            ->orderBy('name')
+            ->orderBy('created_at', 'desc')
             ->paginate(10)
             ->withQueryString();
 
